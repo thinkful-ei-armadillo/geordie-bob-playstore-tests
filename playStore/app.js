@@ -16,7 +16,6 @@ app.get('/apps', (req, res) => {
     //if sort rating...
     if(sort === 'rating') {
       results = results.sort((a, b) => {
-        console.log('rating sorting');
         return a['Rating'] < b['Rating'] ? 1 : a['Rating'] > b['Rating'] ? -1 : 0;
       });
     }    
@@ -36,7 +35,7 @@ app.get('/apps', (req, res) => {
   //if genre, filter
   if(genre) {
     if (!['action', 'puzzle', 'strategy', 'casual', 'arcade', 'card'].includes(genre)) {
-        return res.status(400).send('Genre must be any of the following: action, arcade, card, casual, puzzle, and/or strategy');
+      return res.status(400).send('Genre must be any of the following: action, arcade, card, casual, puzzle, and/or strategy');
     }
     results = results.filter(play => 
       play.Genres.toLowerCase().includes(genre.toLowerCase()));
@@ -46,6 +45,4 @@ app.get('/apps', (req, res) => {
 
 });
 
-app.listen(8000, () => {
-  console.log('Server started on PORT 8000');
-});
+module.exports = app;
